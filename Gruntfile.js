@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 					exclude: ['jquery']
 				}
 			},
-			dist: {
+			consumer: {
 				options: {
 					baseUrl: "src",
 					name: "consumer",
