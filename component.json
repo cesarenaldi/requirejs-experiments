@@ -1,0 +1,7 @@
+{
+  "name": "requirejs-experiments",
+  "version": "0.1.0",
+  "devDependencies": {
+    "jquery": "~2.0.0"
+  }
+}
