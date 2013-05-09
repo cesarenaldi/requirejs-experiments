@@ -14,13 +14,15 @@ module.exports = function (grunt) {
 					baseUrl: "src/library",
 					name: 'a',
 					out: 'dist/library.js',
-					optimize: 'uglify2',
+					optimize: 'none',
 					paths: {
 						jquery: "../../components/jquery/jquery"
 					},
 					wrap: {
-						start: 	'define(function(){\n',
-						end: '});'
+						// start: 	"define(['jquery'], function(jquery){\n",
+						// end: "return require('a');\n});"
+						startFile: "parts/start.frag",
+        				endFile: "parts/end.frag"
 					},
 					exclude: ['jquery']
 				}
@@ -37,9 +39,23 @@ module.exports = function (grunt) {
 					exclude: ['jquery']
 				}
 			}
+		},
+		karma: {
+			options: {
+				configFile: 'karma.conf.js',
+				runnerPort: 9999,
+				browsers: ['Chrome']
+			},
+			continuous: {
+				singleRun: true,
+				browsers: ['PhantomJS']
+			},
+			dev: {
+				reporters: 'dots'
+			}
 		}
 	});
 
-	grunt.registerTask('test', []);
-	grunt.registerTask('default', ['requirejs']);
+	grunt.registerTask('test', ['karma:dev']);
+	grunt.registerTask('default', ['requirejs', 'karma:continuous']);
 };
