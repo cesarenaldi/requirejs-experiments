@@ -18,13 +18,21 @@ module.exports = function (grunt) {
 					paths: {
 						jquery: "../../components/jquery/jquery"
 					},
+					exclude: ['jquery'],
 					wrap: {
-						// start: 	"define(['jquery'], function(jquery){\n",
-						// end: "return require('a');\n});"
-						startFile: "parts/start.frag",
-        				endFile: "parts/end.frag"
-					},
-					exclude: ['jquery']
+						start: grunt.template.process(grunt.file.read("parts/start.frag"), {
+							data: {
+								dependencies: ['jquery'],
+								name: 'a'
+							}
+						}),
+						end: grunt.template.process(grunt.file.read("parts/end.frag"), {
+							data: {
+								dependencies: ['jquery'],
+								entryPoint: 'a'
+							}
+						})
+					}
 				}
 			},
 			consumer: {

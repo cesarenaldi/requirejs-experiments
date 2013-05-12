@@ -6,7 +6,7 @@
         define(['jquery'], factory);
     } else {
         // Browser globals
-        root.principium = factory(root.$);
+        root.a = factory(root.$);
     }
 }(this, function (jquery) {
 
@@ -430,9 +430,11 @@ define('a',['b', 'jquery'], function(b, jquery){
 	}
 });    //Register in the values from the outer closure for common dependencies
     //as local almond modules
-    define('jquery', function () {
-        return jquery;
-    });
+
+	define('jquery', function () {
+		return jquery;
+	});
+
 
     //Use almond's special top-level, synchronous require to trigger factory
     //functions, get the final module value, and export it as the public
